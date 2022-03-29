@@ -5,10 +5,35 @@ import App from './App'
 import store from './store'
 import './api/server'
 
-store.dispatch({ type: 'todos/todosAdded', payload: 'learn actions' });
-store.dispatch({ type: 'todos/todosAdded', payload: 'learn actions' })
-// store.getState()
-console.log(store.getState())
+// Log the initial state
+console.log('Initial state: ', store.getState())
+// {todos: [....], filters: {status, colors}}
+
+// Every time the state changes, log it
+// Note that subscribe() returns a function for unregistering the listener
+const unsubscribe = store.subscribe(() =>
+  console.log('State after dispatch: ', store.getState())
+)
+
+// Now, dispatch some actions
+
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about reducers' })
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about stores' })
+
+store.dispatch({ type: 'todos/todoToggled', payload: 0 })
+store.dispatch({ type: 'todos/todoToggled', payload: 1 })
+
+store.dispatch({ type: 'filters/statusFilterChanged', payload: 'Active' })
+
+store.dispatch({
+  type: 'filters/colorFilterChanged',
+  payload: { color: 'red', changeType: 'added' }
+})
+
+// Stop listening to state updates
+unsubscribe()
+
 
 
 ReactDOM.render(
