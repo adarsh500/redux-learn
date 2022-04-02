@@ -1,5 +1,9 @@
 import React from 'react'
 
+import Header from './features/header/Header'
+import Footer from './features/footer/Footer'
+import TodoList from './features/todos/TodoList'
+
 function App() {
   return (
     <div className="App">
@@ -12,8 +16,12 @@ function App() {
           </div>
         </section>
       </nav>
+
       <section>
-        <h2>Welcome to the Redux Fundamentals example app!</h2>
+        What's on your mind?
+        <Header />
+        <TodoList />
+        <Footer/>
       </section>
     </div>
   )
